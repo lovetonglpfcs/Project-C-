@@ -257,6 +257,7 @@ void ReturnBook(string student[][4],string Book[][6]){
 	cout <<setfill('=') << setw(78) <<"="<<endl;
 	stringstream ss;
 	ss << r;
+	cout <<setfill(' ');
 	for(B=0;B<=100;B++){
 		if(Book[B][5]==ss.str()){
 			cout<<"|"<<setw(10)<<Book[B][0]<<"|"<<setw(30)<<Book[B][1]<<"|"<<setw(15)<<Book[B][2]<<"|"<<setw(12)<<Book[B][3]<<"|"<<setw(5)<<Book[B][4]<<"|"<<endl;
@@ -283,17 +284,18 @@ void ReturnBook(string student[][4],string Book[][6]){
 		if (ISBN!="0")
 			for(B=0;B<=100;B++){
 			if((Book[B][0]==ISBN) && (Book[B][5]==ss.str())){
-				Book[B][5]=="00";
-				cout << Book[B][1] <<" return!"<<endl;
+				Book[B][5]="00";
+				cout << Book[B][1] <<" return!" <<endl;
 				goto EnISBN;
 			}else if(B==100){
-				cout << "ISBN not found or Book not borrow." <<endl;
+				cout << "ISBN not found or Book not borrow.\nTry again." <<endl;
+				goto EnISBN;
 			}
 			}
 	}else if(C==2){
 		for(B=0;B<=100;B++){
 		if(Book[B][5]==ss.str()){
-			Book[B][5]=="00";
+			Book[B][5]="00";
 			cout << Book[B][1] <<"	Returned!"<<endl;
 		}
 	}
