@@ -75,6 +75,7 @@ void init(string student[][4],string Book[][6]){
 
 void AddStudent(string student[][4]){
 	char C;
+	string Add;
 	int r,t;
 	for(r=0;r<=100;r++){
 		if (student[r][0]=="00")break;
@@ -89,8 +90,15 @@ void AddStudent(string student[][4]){
 	first:
 	system("cls");
 	cout <<"Enter your ID : ";
-	cin.ignore();
-	getline(cin,student[r][0]);
+	cin >>Add;
+	for(int check=0;check<Add.length();check++){
+		if(!(isdigit(Add[check]))){			
+			cout <<"Not Number." <<endl;
+			system("pause");
+			goto first;
+		}
+	}
+	student[r][0]=Add;
 	for(t=0;t<100;t++){
 		if (r==t);// ตัวเดียวกันไม่ต้องทำไร
 		else if(student[t][0]==student[r][0]){
@@ -99,6 +107,7 @@ void AddStudent(string student[][4]){
 			goto first;
 		}	
 	}
+	cin.ignore();
 	cout << "Enter your name : ";
 	getline(cin,student[r][1]);
 	cout << "Enter your Faculty : ";
@@ -116,6 +125,7 @@ void AddStudent(string student[][4]){
 
 void AddBook(string Book[][6]){
 	char C;
+	string Add;
 	int r;
 	for(r=0;r<=100;r++){
 		if (Book[r][0]=="00")break;
@@ -127,19 +137,37 @@ void AddBook(string Book[][6]){
 		}
 	}
 	do{
+	onest:
 	system("cls");
 	cout <<"====================Add=Book========================"<<endl;
-	cin.ignore();
 	cout << "Enter ISBN : ";
-	getline(cin,Book[r][0]);
+	cin >> Add;
+	for(int check=0;check<Add.length();check++){
+		if(!(isdigit(Add[check]))){			
+			cout <<"Not Number try again." <<endl;
+			system("pause");
+			goto onest;
+		}
+	}
+	Book[r][0]=Add;
+	cin.ignore();
 	cout << "Enter Bookname : ";
 	getline(cin,Book[r][1]);
 	cout << "Enter writer name : ";
 	getline(cin,Book[r][2]);
 	cout << "Enter publisher : ";
 	getline(cin,Book[r][3]);
+	twost:
 	cout << "Enter book's year : ";
-	getline(cin,Book[r][4]);
+	cin >> Add;
+	for(int check=0;check<Add.length();check++){
+		if(!(isdigit(Add[check]))){			
+			cout <<"Not Number try again." <<endl;
+			system("pause");
+			goto twost;
+		}
+	}
+	Book[r][4]=Add;
 	cout <<"ISBN : "<<Book[r][0]<<endl;
 	cout <<"Bookname : "<<Book[r][1]<<endl;
 	cout <<"Writer : "<<Book[r][2]<<endl;
@@ -182,7 +210,12 @@ void BorrowBook(string student[][4],string Book[][6]){
 		cin >> borrow;
 		if (borrow!="0"){
 		for(B=0;B<=100;B++){
-			if(Book[B][0]==borrow)break;
+			if((Book[B][5]!="00")&&(Book[B][0]==borrow)){
+				cout << "Book is borrowed." <<endl;
+				system("pause");
+				goto AG;
+			}
+			else if(Book[B][0]==borrow)break;
 			else if(B==100){
 				cout << "Book not Found or wrong ISBN." <<endl;
 				system("pause");
